@@ -9,25 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bookstore.service.UserServices;
 
-
 @WebServlet("/admin/create_user")
 public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	//new code
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
-		response.getWriter().println("Email:" + email);
+	// new code
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		
-		String password = request.getParameter("password");
-		response.getWriter().println("Password :" + password);
-		
-		String fullName = request.getParameter("fullname");
-		response.getWriter().println("Fullname :" + fullName);
-		
-		UserServices userservices = new UserServices(); 
-		userservices.createUser(email, fullName, password);
-		
+
+		UserServices userservices = new UserServices();
+		userservices.createUser(request,response);
+		userservices.listUser(request, response,"New User Created Successfully");
 	}
 
 }
