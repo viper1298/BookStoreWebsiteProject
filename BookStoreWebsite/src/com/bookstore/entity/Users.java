@@ -10,7 +10,9 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "Users.findAll", query = "select u from Users u order by u.fullName"),
+@NamedQueries({
+		@NamedQuery(name = "Users.findAll", query = "select u from Users u order by u.fullName"),
+		@NamedQuery(name = "Users.findByEmail", query = "select u from Users u where u.email = :email"),
 		@NamedQuery(name = "Users.countAll", query = "select Count(*) from Users u") })
 public class Users {
 	private Integer userid;

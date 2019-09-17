@@ -50,12 +50,33 @@ public class UserServices {
 
 	}
 
-	public void createUser() {
+	public void createUser()throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String fullName = request.getParameter("fullname");
-
+		
+		Users existsUser = userDAO.findByEmail(email);
+		
+		if(existsUser != null)
+		{
+			String message = " Could not create user. A user with email  " +email+ " already exists";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
+			dispatcher.forward(request,response);
+		}
+		else
+		{
 		Users newUser = new Users(email, fullName, password);
 		userDAO.create(newUser);
+		listUser("New User Created Successfully");
+	}
+}
+	public void editUser() throws ServletException, IOException  {
+		int userId = Integer.parseInt(request.getParameter("id"));
+		Users user = userDAO.get(userId);
+		String editPage = "user_form.jsp";
+		request.setAttribute("user", user);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(editPage);
+		requestDispatcher.forward(request, response);
 	}
 }
