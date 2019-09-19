@@ -25,6 +25,13 @@ public class Users {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Users(Integer userid,String email, String fullName, String password) {
+		this(email, fullName, password);
+		this.userid = userid;
+
+	}
+
 
 	public Users(String email, String fullName, String password) {
 		super();
